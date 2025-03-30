@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Reports</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            margin-top: 50px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            margin-top: 20px;
+            text-align: center;
+        }
+        input[type="file"], input[type="email"], button {
+            display: block;
+            width: 50%;
+            margin: 10px auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .back-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            width: 200px;
+            text-align: center;
+        }
+        .back-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>HR Reports</h1>
+
+        <form action="{{ url_for('upload_report') }}" method="POST" enctype="multipart/form-data">
+            <input type="file" name="report_file" accept=".pdf,.docx,.csv" required>
+            <button type="submit">Upload Report</button>
+        </form>
+
+        <form action="{{ url_for('send_report') }}" method="POST">
+            <input type="email" name="recipient_email" placeholder="Enter recipient's email" required>
+            <button type="submit">Send Report</button>
+        </form>
+
+        <a href="{{ url_for('hr_dashboard') }}" class="back-btn">Back to Dashboard</a>
+    </div>
+
+</body>
+</html>

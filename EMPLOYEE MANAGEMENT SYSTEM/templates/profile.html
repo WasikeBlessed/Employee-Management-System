@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profile</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f8f9fa; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; margin: 0; }
+        .container { max-width: 600px; width: 100%; background: #ffffff; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); padding: 40px; text-align: center; margin: 20px; }
+        h1 { color: #28a745; font-size: 2em; margin-bottom: 20px; }
+        .form-group { margin-bottom: 15px; text-align: left; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        button { background: #007bff; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-top: 20px; }
+        button:hover { background: #0056b3; }
+        a { text-decoration: none; color: #007bff; margin-top: 20px; display: inline-block; }
+        a:hover { text-decoration: underline; }
+        .flash { color: #dc3545; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Your Profile</h1>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="flash">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form method="POST">
+            <div class="form-group">
+                <label>Name:</label>
+                <input type="text" value="{{ user.name }}" disabled>
+            </div>
+            <div class="form-group">
+                <label>Email:</label>
+                <input type="email" value="{{ user.email }}" disabled>
+            </div>
+            <div class="form-group">
+                <label>Phone:</label>
+                <input type="text" name="phone" value="{{ user.phone }}">
+            </div>
+            <div class="form-group">
+                <label>Emergency Contact:</label>
+                <input type="text" name="emergency_contact" value="{{ user.emergency_contact }}">
+            </div>
+            <button type="submit">Update</button>
+        </form>
+        <a href="{{ url_for('employee_dashboard') }}">Back to Dashboard</a>
+    </div>
+</body>
+</html>

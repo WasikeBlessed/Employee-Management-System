@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Assign Roles</title>
+  <style>
+    /* Import Google Font */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      width: 80%;
+      max-width: 800px;
+      text-align: center;
+      color: white;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    h2 {
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.3);
+      text-transform: uppercase;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 8px;
+      border: none;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    select:focus, input:focus {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .btn {
+      background: #ff7b00;
+      color: white;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: background 0.3s ease-in-out;
+    }
+
+    .btn:hover {
+      background: #e66a00;
+    }
+
+    a {
+      color: #ffcc00;
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-block;
+      margin-top: 15px;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Assign Roles</h2>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Current Role</th>
+        <th>Update Role & Permissions</th>
+      </tr>
+      {% for user in users %}
+      <tr>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td>
+          <form method="post" action="{{ url_for('assign_roles') }}">
+            <input type="hidden" name="user_id" value="{{ user._id }}">
+            <select name="role" required>
+              <option value="Employee" {% if user.role == "Employee" %}selected{% endif %}>Employee</option>
+              <option value="HR Manager" {% if user.role == "HR Manager" %}selected{% endif %}>HR Manager</option>
+            </select>
+            <input type="text" name="permissions" placeholder="Permissions" value="{{ user.permissions if user.permissions else '' }}">
+            <button type="submit" class="btn">Update</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    <a href="/admin_dashboard">Back to Dashboard</a>
+  </div>
+</body>
+</html>

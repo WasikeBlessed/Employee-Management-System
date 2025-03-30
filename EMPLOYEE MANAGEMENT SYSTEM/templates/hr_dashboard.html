@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HR Dashboard</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+        body { background-color: #f4f6f9; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        .dashboard-container { max-width: 600px; width: 100%; background: #ffffff; border-radius: 12px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); padding: 35px; text-align: center; }
+        h1 { color: #28a745; font-size: 2.3em; margin-bottom: 10px; font-weight: 600; }
+        p { color: #555; font-size: 1.1em; margin-bottom: 25px; }
+        .button-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-top: 10px; }
+        a { text-decoration: none; color: #ffffff; background: #007bff; padding: 14px 20px; border-radius: 6px; font-size: 1em; font-weight: 500; transition: all 0.3s ease-in-out; display: block; box-shadow: 0 2px 6px rgba(0, 123, 255, 0.2); position: relative; overflow: hidden; }
+        a:hover { background-color: #0056b3; transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3); }
+        a[href="/logout"] { background: #dc3545; }
+        a[href="/logout"]:hover { background-color: #c82333; box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3); }
+        @media (max-width: 600px) { .button-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>HR Dashboard</h1>
+        <p>Welcome, {{ session.username }}! You are logged in as an HR Manager.</p>
+        <p>Pending Permission Requests: {{ pending_requests_count }}</p>
+        <div class="button-grid">
+            <a href="{{ url_for('add_employee') }}">➕ Add Employee</a>
+            <a href="{{ url_for('view_employees') }}">👥 View Employees</a>
+            <a href="{{ url_for('hr_reports') }}">📊 HR Reports</a>
+            <a href="{{ url_for('hr_employee_reports') }}">📋 Employee Reports</a>
+            <a href="{{ url_for('hr_notifications') }}">🔔 HR Notifications</a>
+            <a href="{{ url_for('manage_permissions') }}">🔑 Manage Permissions</a>
+            <a href="{{ url_for('logout') }}">🚪 Logout</a>
+        </div>
+    </div>
+</body>
+</html>

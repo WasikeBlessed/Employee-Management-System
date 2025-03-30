@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Performance Tracking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            margin: 20px;
+        }
+        h1 {
+            color: #28a745;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #007bff;
+            color: #fff;
+            font-weight: 600;
+        }
+        td {
+            color: #333;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #e9ecef;
+        }
+        a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 1.1em;
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            background: #007bff;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        a:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+        }
+        @media (max-width: 600px) {
+            table, th, td {
+                font-size: 0.9em;
+            }
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Performance Tracking</h1>
+        <table>
+            <tr><th>Feedback</th><th>Rating</th><th>Date</th></tr>
+            <tr>
+                <td>Consistently exceeded sales targets by 15% in Q1 2025, demonstrating strong client engagement.</td>
+                <td>4.8/5</td>
+                <td>2025-03-31</td>
+            </tr>
+            <tr>
+                <td>Improved team collaboration by leading weekly stand-ups; minor delays in report submissions noted.</td>
+                <td>4.2/5</td>
+                <td>2025-02-28</td>
+            </tr>
+            <tr>
+                <td>Outstanding problem-solving during the server outage; received positive feedback from IT manager.</td>
+                <td>4.9/5</td>
+                <td>2025-01-15</td>
+            </tr>
+            <tr>
+                <td>Met project deadlines but needs to enhance communication with stakeholders for smoother workflows.</td>
+                <td>3.9/5</td>
+                <td>2024-12-20</td>
+            </tr>
+        </table>
+        <a href="{{ url_for('employee_dashboard') }}">Back to Dashboard</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>System Activities</title>
+  <style>
+    /* Import Google Font */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      background: #1e1e1e;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 10px rgba(0, 255, 255, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #00ffff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      background: #252525;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #333;
+    }
+
+    th {
+      background: #00ffff;
+      color: #111;
+      text-transform: uppercase;
+    }
+
+    tr:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+
+    td {
+      color: #bdbdbd;
+    }
+
+    .highlight {
+      color: #ffcc00;
+      font-weight: 600;
+    }
+
+    a {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #00ffff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: #ffcc00;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>System Activities</h2>
+    <table>
+      <tr>
+        <th>Action</th>
+        <th>User ID</th>
+        <th>Details</th>
+      </tr>
+      {% for log in logs %}
+      <tr>
+        <td>{{ log.action }}</td>
+        <td>{{ log.user_id }}</td>
+        <td>
+          {% if log.new_role %}New Role: <span class="highlight">{{ log.new_role }}</span>{% endif %}
+          {% if log.permissions %}; Permissions: <span class="highlight">{{ log.permissions }}</span>{% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    <a href="/admin_dashboard">Back to Dashboard</a>
+  </div>
+</body>
+</html>

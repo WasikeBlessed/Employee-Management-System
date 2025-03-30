@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Dashboard</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+        body { background-color: #f4f6f9; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        .dashboard-container { max-width: 800px; width: 100%; background: #ffffff; border-radius: 12px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); padding: 35px; text-align: center; }
+        h1 { color: #28a745; font-size: 2.3em; margin-bottom: 10px; font-weight: 600; }
+        p { color: #555; font-size: 1.1em; margin-bottom: 15px; }
+        .button-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-top: 10px; }
+        a { text-decoration: none; color: #ffffff; background: #007bff; padding: 14px 20px; border-radius: 6px; font-size: 1em; font-weight: 500; transition: all 0.3s ease-in-out; display: block; box-shadow: 0 2px 6px rgba(0, 123, 255, 0.2); }
+        a:hover { background-color: #0056b3; transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3); }
+        a[href="/logout"] { background: #dc3545; }
+        a[href="/logout"]:hover { background-color: #c82333; box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3); }
+        .requests { margin-top: 20px; text-align: left; }
+        .requests h3 { color: #333; font-size: 1.2em; margin-bottom: 10px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background: #007bff; color: white; font-weight: 500; }
+        .status-pending { color: #ffc107; }
+        .status-approved { color: #28a745; }
+        .status-denied { color: #dc3545; }
+        @media (max-width: 600px) { .button-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Employee Dashboard</h1>
+        <p>Welcome, {{ user.name }}! You are logged in as an Employee.</p>
+        <p>Current Permissions: {{ user.permissions if user.permissions else 'None' }}</p>
+        <div class="button-grid">
+            <a href="{{ url_for('profile') }}">👤 Profile</a>
+            <a href="{{ url_for('attendance_leaves') }}">📅 Attendance & Leaves</a>
+            <a href="{{ url_for('salary_details') }}">💰 Salary Details</a>
+            <a href="{{ url_for('work_schedule') }}">⏰ Work Schedule</a>
+            <a href="{{ url_for('request_permission') }}">🔑 Request Permission</a>
+            <!-- Optional: Add a link to a dedicated permission status page -->
+            <a href="{{ url_for('permission_status') }}">📋 View Permission Status</a>
+            <a href="{{ url_for('logout') }}">🚪 Logout</a>
+        </div>
+        <div class="requests">
+            <h3>Your Permission Requests</h3>
+            {% if requests %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Permission</th>
+                            <th>Submitted At</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for req in requests %}
+                            <tr>
+                                <td>{{ req.permission }}</td>
+                                <td>{{ req.submitted_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                                <td class="status-{{ req.status.lower() }}">{{ req.status }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No permission requests submitted yet.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

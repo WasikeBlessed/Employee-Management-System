@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Attendance & Leaves</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f8f9fa; min-height: 100vh; padding: 20px; margin: 0; }
+        .container { max-width: 900px; margin: 0 auto; background: #ffffff; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); padding: 40px; }
+        h1 { color: #28a745; font-size: 2em; margin-bottom: 20px; text-align: center; }
+        h3 { color: #555; margin-top: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { font-weight: bold; display: block; margin-bottom: 5px; }
+        select, input[type="date"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        button { background: #007bff; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background: #007bff; color: #fff; }
+        a { text-decoration: none; color: #007bff; margin-top: 20px; display: inline-block; }
+        a:hover { text-decoration: underline; }
+        .flash { color: #dc3545; margin-bottom: 10px; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Attendance & Leaves</h1>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="flash">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <h3>Leave Balance</h3>
+        {% if user.leave_balance %}
+            <p>Sick: {{ user.leave_balance.sick }} days | Vacation: {{ user.leave_balance.vacation }} days</p>
+        {% else %}
+            <p>Leave balance not set. Contact HR.</p>
+        {% endif %}
+        <h3>Apply for Leave</h3>
+        <form method="POST">
+            <div class="form-group">
+                <label>Leave Type:</label>
+                <select name="leave_type" required>
+                    <option value="sick">Sick Leave</option>
+                    <option value="vacation">Vacation</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Start Date:</label>
+                <input type="date" name="start_date" required>
+            </div>
+            <div class="form-group">
+                <label>End Date:</label>
+                <input type="date" name="end_date" required>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+        <h3>Leave History</h3>
+        <table>
+            <tr><th>Type</th><th>Start Date</th><th>End Date</th><th>Status</th></tr>
+            {% for leave in leaves %}
+            <tr>
+                <td>{{ leave.leave_type }}</td>
+                <td>{{ leave.start_date }}</td>
+                <td>{{ leave.end_date }}</td>
+                <td>{{ leave.status }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="{{ url_for('employee_dashboard') }}">Back to Dashboard</a>
+    </div>
+</body>
+</html>

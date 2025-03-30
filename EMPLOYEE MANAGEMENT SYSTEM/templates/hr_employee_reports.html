@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Reports</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
+        .container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; }
+        input, textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        .btn { background: #007bff; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer; }
+        .table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .table th, .table td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        .table th { background: #007bff; color: white; }
+        .alert { padding: 10px; margin-bottom: 10px; border-radius: 5px; }
+        .alert-success { background: #d4edda; color: #155724; }
+        .alert-error { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>Employee Reports</h2>
+        
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <!-- Form to Add Reports -->
+        <form action="{{ url_for('hr_employee_reports') }}" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="report_title">Report Title:</label>
+                <input type="text" class="form-control" id="report_title" name="report_title" required>
+            </div>
+
+            <div class="form-group">
+                <label for="report_description">Report Description:</label>
+                <textarea class="form-control" id="report_description" name="report_description" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="report_file">Attach File (PDF, DOCX, CSV):</label>
+                <input type="file" class="form-control" id="report_file" name="report_file" accept=".pdf,.docx,.csv">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Report</button>
+        </form>
+
+        <hr>
+
+        <!-- Display Submitted Reports -->
+        <h3>Submitted Reports</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Submitted By</th>
+                    <th>File</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for report in reports %}
+                <tr>
+                    <td>{{ report.title }}</td>
+                    <td>{{ report.description }}</td>
+                    <td>{{ report.submitted_by }}</td>
+                    <td>
+                        {% if report.file_path %}
+                            <a href="{{ url_for('uploaded_file', filename=report.file_path.split('/')[-1]) }}" target="_blank">Download</a>
+                        {% else %}
+                            No file attached
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ url_for('hr_dashboard') }}">Back to Dashboard</a>
+    </div>
+</body>
+</html>

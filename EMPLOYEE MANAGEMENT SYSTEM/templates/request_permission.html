@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Permission</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+        body { background-color: #f4f6f9; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        .container { max-width: 400px; width: 100%; background: #ffffff; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); padding: 30px; text-align: center; }
+        h2 { color: #28a745; font-size: 1.8em; margin-bottom: 20px; font-weight: 600; }
+        .input-group { margin-bottom: 15px; text-align: left; }
+        .input-group label { font-weight: 500; color: #555; }
+        .input-group input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 1em; }
+        button { padding: 10px 20px; background: #007bff; border: none; border-radius: 5px; color: white; font-size: 1em; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .message { padding: 10px; border-radius: 5px; margin-bottom: 20px; font-size: 1em; color: white; }
+        .success { background: #28a745; }
+        .error { background: #dc3545; }
+        a { color: #007bff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Request Permission</h2>
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="message {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form method="post" action="/request_permission">
+            <div class="input-group">
+                <label for="permission">Permission</label>
+                <input type="text" id="permission" name="permission" placeholder="e.g., Access Reports" required>
+            </div>
+            <button type="submit">Submit Request</button>
+        </form>
+        <p><a href="/employee_dashboard">Back to Dashboard</a></p>
+    </div>
+</body>
+</html>

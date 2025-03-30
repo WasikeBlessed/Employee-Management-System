@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Generate Reports</title>
+  <style>
+    /* Import Google Font */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #f8f9fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      width: 80%;
+      max-width: 600px;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h2 {
+      color: #007bff;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      background: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background: #007bff;
+      color: white;
+    }
+
+    tr:hover {
+      background: rgba(0, 123, 255, 0.1);
+    }
+
+    td {
+      color: #333;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 15px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #0056b3;
+    }
+
+    a {
+      display: block;
+      margin-top: 15px;
+      color: #007bff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Generate Reports</h2>
+
+    <button class="btn" onclick="generateReport()">Generate Report</button>
+
+    <table id="reportTable">
+      <tr>
+        <th>Role</th>
+        <th>User Count</th>
+      </tr>
+      {% for item in report %}
+      <tr>
+        <td>{{ item._id }}</td>
+        <td>{{ item.count }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <a href="/admin_dashboard">Back to Dashboard</a>
+  </div>
+
+  <script>
+    function generateReport() {
+      alert("Generating report...");
+
+      // Simulate fetching updated data (Replace with actual backend call)
+      setTimeout(() => {
+        alert("Report generated successfully!");
+        location.reload(); // Refresh the page (or update the table dynamically)
+      }, 1500);
+    }
+  </script>
+
+</body>
+</html>

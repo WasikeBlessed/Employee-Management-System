@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Messaging</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            margin: 20px;
+        }
+        h1 {
+            color: #28a745;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        h3 {
+            color: #555;
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #007bff;
+            color: #fff;
+            font-weight: 600;
+        }
+        td {
+            color: #333;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #e9ecef;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        select, textarea, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        button {
+            background: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+        }
+        a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 1.1em;
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            background: #007bff;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        a:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+        }
+        .flash {
+            color: #dc3545;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .no-data {
+            color: #555;
+            font-size: 12em;
+            margin-top: 20px;
+        }
+        @media (max-width: 600px) {
+            table, th, td {
+                font-size: 0.9em;
+            }
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h3 {
+                font-size: 1.3em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Messaging</h1>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="flash">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <h3>Send a Message</h3>
+        <form method="POST">
+            <div class="form-group">
+                <label>Recipient:</label>
+                <select name="recipient_id" required>
+                    <option value="">Select a recipient</option>
+                    {% for user in users %}
+                        <option value="{{ user._id }}">{{ user.name }} ({{ user.role }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Method:</label>
+                <select name="method" required>
+                    <option value="email">Email</option>
+                    <option value="mobile">Mobile Number</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Recipient Contact:</label>
+                <input type="text" name="contact" placeholder="Enter email or mobile number" required>
+            </div>
+            <div class="form-group">
+                <label>Message:</label>
+                <textarea name="message" placeholder="Type your message here" required></textarea>
+            </div>
+            <button type="submit">Send Message</button>
+        </form>
+
+        <h3>Message History</h3>
+        {% if messages %}
+        <table>
+            <tr><th>Sender</th><th>Message</th><th>Method</th><th>Contact</th><th>Sent At</th></tr>
+            {% for msg in messages %}
+            <tr>
+                <td>{{ msg.sender_name }}</td>
+                <td>{{ msg.message }}</td>
+                <td>{{ msg.method }}</td>
+                <td>{{ msg.contact }}</td>
+                <td>{{ msg.sent_at.strftime('%Y-%m-%d %H:%M') }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p class="no-data">No messages yet.</p>
+        {% endif %}
+
+        <a href="{{ url_for('employee_dashboard') }}">Back to Dashboard</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Training & Development</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            margin: 20px;
+        }
+        h1 {
+            color: #28a745;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        h3 {
+            color: #555;
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #007bff;
+            color: #fff;
+            font-weight: 600;
+        }
+        td {
+            color: #333;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #e9ecef;
+        }
+        a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 1.1em;
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            background: #007bff;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        a:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+        }
+        @media (max-width: 600px) {
+            table, th, td {
+                font-size: 0.9em;
+            }
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h3 {
+                font-size: 1.3em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Training & Development</h1>
+
+        <h3>Available Trainings</h3>
+        <table>
+            <tr><th>Title</th><th>Description</th><th>Duration</th></tr>
+            <tr>
+                <td>Advanced Project Management</td>
+                <td>Master Agile and Scrum methodologies for complex project delivery.</td>
+                <td>2 weeks</td>
+            </tr>
+            <tr>
+                <td>Cybersecurity Essentials</td>
+                <td>Learn to protect organizational data with hands-on security practices.</td>
+                <td>1 month</td>
+            </tr>
+            <tr>
+                <td>Effective Communication Skills</td>
+                <td>Enhance team and client interactions with proven techniques.</td>
+                <td>3 days</td>
+            </tr>
+            <tr>
+                <td>Data Analysis with Python</td>
+                <td>Analyze data using Python libraries like Pandas and NumPy.</td>
+                <td>3 weeks</td>
+            </tr>
+            <tr>
+                <td>Leadership in the Digital Age</td>
+                <td>Develop skills to lead teams in a tech-driven workplace.</td>
+                <td>1 week</td>
+            </tr>
+            <tr>
+                <td>Cloud Computing Basics</td>
+                <td>Understand AWS, Azure, and Google Cloud fundamentals.</td>
+                <td>2 months</td>
+            </tr>
+            <tr>
+                <td>Customer Service Excellence</td>
+                <td>Boost client satisfaction with advanced service strategies.</td>
+                <td>5 days</td>
+            </tr>
+            <tr>
+                <td>Financial Reporting Skills</td>
+                <td>Create accurate financial reports compliant with industry standards.</td>
+                <td>10 days</td>
+            </tr>
+        </table>
+
+        <h3>Your Enrolled Trainings</h3>
+        <table>
+            <tr><th>Title</th><th>Start Date</th><th>Status</th></tr>
+            <tr>
+                <td>Team Leadership Fundamentals</td>
+                <td>2025-01-15</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>Advanced Excel for Analysts</td>
+                <td>2025-02-01</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>Workplace Safety Protocols</td>
+                <td>2025-03-05</td>
+                <td>In Progress</td>
+            </tr>
+            <tr>
+                <td>Introduction to Machine Learning</td>
+                <td>2025-03-10</td>
+                <td>In Progress</td>
+            </tr>
+            <tr>
+                <td>Time Management Mastery</td>
+                <td>2025-02-20</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>Conflict Resolution Techniques</td>
+                <td>2025-03-15</td>
+                <td>Scheduled</td>
+            </tr>
+        </table>
+
+        <a href="{{ url_for('employee_dashboard') }}">Back to Dashboard</a>
+    </div>
+</body>
+</html>

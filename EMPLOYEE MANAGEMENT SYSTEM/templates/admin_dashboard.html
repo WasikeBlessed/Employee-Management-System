@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Dashboard</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #f4f4f4; }
+    .navbar { background-color: #333; overflow: hidden; padding: 10px; }
+    .navbar a { float: left; display: block; color: #fff; padding: 14px 20px; text-decoration: none; }
+    .navbar a:hover { background-color: #ddd; color: #333; }
+    .navbar a.logout { float: right; background: #dc3545; color: white; }
+    .container { padding: 20px; max-width: 1100px; margin: auto; }
+    .card { background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 20px; margin-top: 20px; text-align: center; }
+    .card h3 { margin: 10px 0; }
+    .dashboard-grid { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+    .dashboard-item { flex: 1; min-width: 250px; padding: 20px; border-radius: 8px; color: white; }
+    .bg-primary { background: #007bff; }
+    .bg-success { background: #28a745; }
+    .bg-warning { background: #ffc107; }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Menu -->
+  <div class="navbar">
+    <a href="/admin_dashboard">Dashboard</a>
+    <a href="/manage_users">Manage Users</a>
+    <a href="/assign_roles">Assign Roles</a>
+    <a href="/system_activities">System Activities</a>
+    <a href="/generate_reports">Generate Reports</a>
+    <a href="/logout" class="logout">Logout</a>
+  </div>
+
+  <!-- Dashboard Content -->
+  <div class="container">
+    <div class="card">
+      <h2>Admin Dashboard</h2>
+      <p>Manage user accounts, assign roles/permissions, monitor system activities, and generate reports.</p>
+    </div>
+
+    <!-- Admin Stats -->
+    <div class="dashboard-grid">
+      <div class="dashboard-item bg-primary">
+        <h3>Total Users</h3>
+        <h2>{{ total_users }}</h2>
+      </div>
+      <div class="dashboard-item bg-success">
+        <h3>Employees</h3>
+        <h2>{{ employees_count }}</h2>
+      </div>
+      <div class="dashboard-item bg-warning">
+        <h3>HR Managers</h3>
+        <h2>{{ hr_count }}</h2>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
